@@ -1,7 +1,7 @@
-from setuptools import setup, find_packages
+efrom setuptools import setup, find_packages
 
 setup(
-    name='growatt-api',
+    name='growatt-api-devices',
     version='0.1.3',
     packages=find_packages(),
     install_requires=[
