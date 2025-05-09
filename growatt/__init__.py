@@ -580,5 +580,51 @@ class Growatt:
         except re.exceptions.JSONDecodeError:
             raise ValueError("Invalid response received. Please ensure you are logged in.")
 
+    def get_devices_by_plant(self, plant_id: str, curr_page: int = 2):
+            """
+            Retrieves device data for a given plant with pagination.
+
+            Args:
+                plant_id (str): The ID of the plant.
+                curr_page (int): The current page number for pagination.
+
+            Returns:
+                dict: The response from the server with the devices list.
+            """
+            # Prepare the form data
+            data = {
+                'plantId': plant_id,
+                'currPage': curr_page,
+            }
+
+            # Set headers (including session cookies)
+            headers = {
+                'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+                'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
+                'X-Requested-With': 'XMLHttpRequest',
+            }
+
+            # Send the POST request
+            try:
+                response = self.session.post(f"{self.BASE_URL}/panel/getDevicesByPlantList", data=data, headers=headers)
+
+                # Check if the response is successful (status code 200)
+                if response.status_code == 200:
+                    try:
+                        # Try to parse the response as JSON
+                        return response.json()
+                    except ValueError as e:
+                        print(f"Error parsing JSON: {e}")
+                        print(f"Response text: {response.text[:500]}")  # Print the first 500 characters of the response
+                        return None
+                else:
+                    # If status code is not 200, raise an HTTPError
+                    print(f"Error: {response.status_code}")
+                    print(f"Response text: {response.text}")
+                    response.raise_for_status()  # This will raise an error for non-2xx status codes
+            except requests.exceptions.RequestException as e:
+                # Handle other errors such as connection problems or timeout
+                print(f"Request failed: {e}")
+                return None
 
 
