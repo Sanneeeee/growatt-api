@@ -7,17 +7,12 @@ setup(
     install_requires=[
         'requests'
     ],
-    # entry_points={
-    #     'console_scripts': [
-    #         'growatt=growatt.growatt:main',
-    #     ],
-    # },
-    author='Brandon Bondig',
-    author_email='brandon@bondig.dk',
-    description='A Python wrapper for Growatt API',
+    author='Sanneeeee',
+    author_email='sanne.boels@student.hu.nl',
+    description='My modified fork of the Growatt API wrapper',
     long_description=open('README.md').read(),
     long_description_content_type='text/markdown',
-    url='https://github.com/brandonbondig/growatt',
+    url='https://github.com/Sanneeeee/growatt-api',
     classifiers=[
         'Programming Language :: Python :: 3',
         'License :: OSI Approved :: MIT License',
