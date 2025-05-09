@@ -580,7 +580,7 @@ class Growatt:
         except re.exceptions.JSONDecodeError:
             raise ValueError("Invalid response received. Please ensure you are logged in.")
 
-    def get_devices_by_plant(self, plant_id: str, curr_page: int = 2):
+    def get_devices_by_plant(self, plant_id: str, curr_page: int = 1):
             """
             Retrieves device data for a given plant with pagination.
 
